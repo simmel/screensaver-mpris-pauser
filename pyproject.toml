@@ -23,6 +23,7 @@ build-backend = "poetry.core.masonry.api"
 screensaver-mpris-pauser = 'screensaver_mpris_pauser:main'
 
 [tool.mypy]
+strict = true
 show_error_codes = true
 
 [tool.pylint]
