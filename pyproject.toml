@@ -17,3 +17,18 @@ black = "^22.3.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+show_error_codes = true
+
+[tool.pylint]
+    [tool.pylint.master]
+    disable= [
+        'missing-docstring',
+        'consider-using-f-string',
+        ]
+
+    output-format = 'parseable'
+
+[tool.isort]
+profile = "black"
