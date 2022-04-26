@@ -27,8 +27,22 @@ def main():
     loop.run()
 
 
+def pause_all_players():
+    for service in session_bus.list_names():
+        if service.startswith("org.mpris.MediaPlayer2"):
+            logging.info("Pausing %s", service)
+            pause_player(service)
+
+
+def pause_player(player_interface):
+    player = session_bus.get_object(player_interface, "/org/mpris/MediaPlayer2")
+    player.Pause(dbus_interface="org.mpris.MediaPlayer2.Player")
+
+
 def pause_mpris(enabled, **kwargs):
     logging.debug("Screensaver %r=%r", kwargs["member"], enabled)
+    if kwargs["member"] == "ActiveChanged" and enabled:
+        pause_all_players()
 
 
 if __name__ == "__main__":
